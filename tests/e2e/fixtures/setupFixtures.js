@@ -45,8 +45,8 @@ function createPdf(name, text) {
   fs.writeFileSync(path.join(fixturesDir, name), Buffer.from(content, 'ascii'));
 }
 
-createPdf('rental_happy.pdf', 'Rental Agreement tenant landlord security deposit monthly rent');
-createPdf('freelancer_happy.pdf', 'independent contractor service agreement client deliverables');
+createPdf('rental_happy.pdf', 'RENTAL AGREEMENT\\n\\nThis Rental Agreement is made on 01-Jan-2025 between Landlord: Mr. Rajesh Kumar and Tenant: Ms. Priya Sharma.\\n\\n1. Property: 123 Fake Street, Hyderabad, Telangana.\\n2. Rent: The tenant shall pay a monthly rent of Rs. 20,000.\\n3. Security Deposit: A refundable deposit of Rs. 40,000 is to be paid before move-in.\\n4. Maintenance: The tenant is responsible for minor repairs and paying electricity bills.\\n5. Termination: Either party may terminate this lease with a 1-month written notice.\\n\\nSignatures:\\n[Rajesh Kumar]     [Priya Sharma]');
+createPdf('freelancer_happy.pdf', 'FREELANCE SERVICE AGREEMENT\\n\\nThis Agreement is entered into on 15-Feb-2025 between Client: TechCorp India Pvt Ltd and Freelancer: Mr. Ankit Verma.\\n\\n1. Scope of Work: The freelancer agrees to develop a website for the client.\\n2. Payment: The client shall pay a total of Rs. 50,000 upon completion of the project.\\n3. Independent Contractor: The freelancer is an independent contractor, not an employee.\\n4. Confidentiality: The freelancer must not disclose any proprietary information.\\n5. Dispute Resolution: Any disputes shall be resolved in the courts of Hyderabad.\\n\\nSignatures:\\n[TechCorp India]     [Ankit Verma]');
 createPdf('unknown_recipe.pdf', 'Cooking Recipe');
 createPdf('employment_contract.pdf', 'employment agreement employer employee salary');
 createPdf('insufficient_source.pdf', 'Rental Agreement tenant landlord security deposit INSUFFICIENTSOURCE');
