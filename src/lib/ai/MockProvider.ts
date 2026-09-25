@@ -124,7 +124,7 @@ export class MockProvider implements AIProvider {
         content: "{}",
         usage: { promptTokens: 0, completionTokens: 0 }
       };
-    } catch (_) {
+    } catch {
       throw new AIProviderError(`Mock provider failed to generate for ${fixtureName}`, 'PROVIDER_UNAVAILABLE');
     }
   }
