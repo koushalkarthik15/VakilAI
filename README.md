@@ -151,3 +151,35 @@ npm run type-check
 
 ## License
 MIT
+
+---
+
+## Continuous Integration
+
+This project uses GitHub Actions to automatically validate all pushes and pull requests.
+The CI workflow ensures that the codebase is completely reproducible from a clean environment.
+
+- **Triggers**: Pushes and Pull Requests to `main`.
+- **Validation Steps**: Typecheck, Lint, Unit/Integration Tests (`vitest`), E2E Tests (`playwright`), and Production Build (`next build`).
+- **Mock AI Providers**: CI uses `MOCK_AI_PROVIDERS=true` to test deterministic logic and prompt-injection safety boundaries without exposing real API keys.
+- **MongoDB**: CI uses an ephemeral MongoDB `mongo:7` service container to run integration and E2E tests (seeded via `npm run db:seed`).
+
+## Vercel Deployment (Build Verified Only)
+
+Vakil AI is build-compatible with standard Vercel Next.js deployments. 
+
+### Deployment Steps
+1. Push your repository to GitHub.
+2. Import the project into Vercel.
+3. Configure the required environment variables in the Vercel dashboard:
+   - `GEMINI_API_KEY`
+   - `GEMINI_MODEL`
+   - `GEMINI_API_KEY_SECONDARY`
+   - `GEMINI_MODEL_SECONDARY`
+   - `GROQ_API_KEY`
+   - `GROQ_MODEL`
+   - `MONGODB_URI` (Use a hosted MongoDB cluster like MongoDB Atlas)
+4. Deploy the application.
+5. Visit your deployed URL and verify functionality by navigating to the landing page and checking `/api/health`.
+
+*Note: PDF text extraction is performed client-side with PDF.js. AI provider calls and Legal KB access remain server-side through the Next.js application. Vercel's standard Node.js serverless functions are used to manage interactions with MongoDB and the AI APIs.*
