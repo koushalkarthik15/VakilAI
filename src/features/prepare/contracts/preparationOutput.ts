@@ -10,6 +10,6 @@ export const PreparationOutputSchema = z.object({
   facts_to_verify: z.array(z.string()),
   source_references: z.array(z.string()),
   warnings: z.array(z.string())
-});
+}).strict();
 
 export type PreparationOutput = z.infer<typeof PreparationOutputSchema>;

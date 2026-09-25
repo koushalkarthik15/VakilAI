@@ -13,5 +13,6 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
     exclude: ['tests/e2e/**/*', 'node_modules/**/*'],
+    pool: 'vmThreads',
   },
 });

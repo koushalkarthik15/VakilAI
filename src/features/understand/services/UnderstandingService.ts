@@ -16,7 +16,7 @@ export const AIExtractionSchema = z.object({
     role: z.string(),
     display_reference: z.string(),
     pii_fields: z.record(z.string(), z.string()).optional()
-  })),
+  }).strict()),
   document_facts: z.array(z.object({
     fact_id: z.string().min(1),
     clause_id: z.string().min(1).optional(),
@@ -24,11 +24,11 @@ export const AIExtractionSchema = z.object({
     value: z.string().optional(),
     page_reference: z.number().int().optional(),
     status: z.enum(['STATED', 'NOT_STATED', 'UNCLEAR'])
-  })),
+  }).strict()),
   clauses: z.array(ClauseReferenceSchema),
   missing_information: z.array(z.string()),
   uncertainties: z.array(z.string())
-});
+}).strict();
 
 export interface UnderstandingServiceOptions {
   deterministicClassification: UnderstandingContext['classification'];
