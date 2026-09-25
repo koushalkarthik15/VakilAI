@@ -1,0 +1,22 @@
+{
+  "relevant_clauses": [],
+  "detected_patterns": [],
+  "missing_information": [],
+  "findings": [
+    {
+      "finding_id": "f1",
+      "severity": "LOW",
+      "summary": "No risks identified in this document.",
+      "explanation": "Everything is standard.",
+      "issue_type": "Info",
+      "status": "SUPPORTED",
+      "confidence": "HIGH",
+      "missing_information": [],
+      "clause_ids": [
+        "c1"
+      ],
+      "rule_ids": [],
+      "source_ids": []
+    }
+  ]
+}

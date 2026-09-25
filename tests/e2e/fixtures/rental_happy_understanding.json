@@ -1,0 +1,16 @@
+{
+  "parties": [],
+  "document_facts": [],
+  "clauses": [
+    {
+      "clause_id": "c1",
+      "page_start": 1,
+      "page_end": 1,
+      "text": "This is a rental lease agreement between you and the landlord in India.",
+      "clause_type": "General",
+      "extraction_status": "SUCCESS"
+    }
+  ],
+  "missing_information": [],
+  "uncertainties": []
+}

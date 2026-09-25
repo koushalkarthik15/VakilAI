@@ -1,0 +1,9 @@
+export const ActionTypes = {
+  REVIEW_CLAUSE: 'REVIEW_CLAUSE',
+  GATHER_DOCUMENTS: 'GATHER_DOCUMENTS',
+  CLARIFY_WITH_PARTY: 'CLARIFY_WITH_PARTY',
+  CONSULT_PROFESSIONAL: 'CONSULT_PROFESSIONAL',
+  VISIT_GOVERNMENT_ROUTE: 'VISIT_GOVERNMENT_ROUTE'
+} as const;
+
+export type ActionType = typeof ActionTypes[keyof typeof ActionTypes];

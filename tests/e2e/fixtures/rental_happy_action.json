@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "session_id": "mock-session-123",
+    "document_id": "mock-doc-123",
+    "created_at": "2026-09-25T12:13:42.179Z",
+    "source_stage": "ACT"
+  },
+  "findings": [],
+  "action_items": [],
+  "government_routes": [],
+  "questions": [],
+  "information_to_collect": [],
+  "warnings": []
+}

@@ -1,0 +1,46 @@
+{
+  "name": "temp-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "type-check": "tsc --noEmit",
+    "db:seed": "tsx src/features/legal-kb/seeds/seedRunner.ts",
+    "postinstall": "node -e \"const fs=require('fs'); fs.copyFileSync('node_modules/pdfjs-dist/build/pdf.worker.mjs', 'public/pdf.worker.mjs')\""
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "compromise": "^14.17.0",
+    "groq-sdk": "^1.6.0",
+    "mongoose": "^9.10.1",
+    "next": "16.3.5",
+    "pdfjs-dist": "^4.0.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "^4.6.5",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@playwright/test": "^1.42.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "jsdom": "^29.1.1",
+    "tailwindcss": "^4",
+    "tsx": "^4.7.1",
+    "typescript": "^5",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

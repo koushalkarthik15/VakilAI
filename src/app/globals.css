@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFBF0; /* --warm-white */
+  --foreground: #0F172A; /* --text-primary */
+  
+  --slate-900: #1E293B;
+  --slate-600: #475569;
+  --slate-100: #F1F5F9;
+  --slate-50: #F8FAFC;
+  --saffron-600: #D97706;
+  --saffron-100: #FEF3C7;
+  --warm-white: #FFFBF0;
+  
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+
+  --risk-critical-border: #FC8181;
+  --risk-critical-bg: #FFF5F5;
+  --risk-high-border: #FBD38D;
+  --risk-high-bg: #FFFBEB;
+  --risk-medium-border: #90CDF4;
+  --risk-medium-bg: #EBF2FA;
+  --risk-low-border: #86EFAC;
+  --risk-low-bg: #F0FDF4;
+  
+  --border-default: rgba(15,23,42,.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-slate-900: var(--slate-900);
+  --color-slate-600: var(--slate-600);
+  --color-slate-100: var(--slate-100);
+  --color-slate-50: var(--slate-50);
+  --color-saffron-600: var(--saffron-600);
+  --color-saffron-100: var(--saffron-100);
+  --color-warm-white: var(--warm-white);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border-default: var(--border-default);
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-regional: 'Noto Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}

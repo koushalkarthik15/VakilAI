@@ -1,0 +1,16 @@
+{
+  "parties": [],
+  "document_facts": [],
+  "clauses": [
+    {
+      "clause_id": "c2",
+      "page_start": 1,
+      "page_end": 1,
+      "text": "This is a freelancer service agreement.",
+      "clause_type": "General",
+      "extraction_status": "SUCCESS"
+    }
+  ],
+  "missing_information": [],
+  "uncertainties": []
+}
