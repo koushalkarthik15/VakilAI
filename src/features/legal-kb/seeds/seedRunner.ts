@@ -32,9 +32,9 @@ async function verifyReferentialIntegrity() {
 }
 
 async function runSeed() {
-  const uri = process.env.MONGODB_URL;
+  const uri = process.env.MONGODB_URL || process.env.MONGODB_URI;
   if (!uri) {
-    throw new Error('Failed to connect to MongoDB via MONGODB_URL. Please set MONGODB_URL environment variable.');
+    throw new Error('Failed to connect to MongoDB via MONGODB_URL or MONGODB_URI. Please set the environment variable.');
   }
 
   try {
