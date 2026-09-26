@@ -101,7 +101,7 @@ export async function POST(req: Request) {
     });
     logger.analysisStageCompleted({ request_id, stage: 'understanding', duration_ms: Date.now() - understandingStart });
 
-    // 4. Applicability (skip DB in mock mode for E2E test isolation)
+    const applicabilityStart = Date.now();
     let applicabilityResult: ApplicabilityResult;
 
     if (process.env.MOCK_AI_PROVIDERS === 'true') {
@@ -111,7 +111,6 @@ export async function POST(req: Request) {
       const { default: dbConnect } = await import('@/lib/dbConnect');
       await dbConnect();
 
-      const applicabilityStart = Date.now();
       const jurisdictionFact = understandingContext.document_facts.find(f => f.field === 'JURISDICTION');
       const jurisdictionValue = jurisdictionFact?.value || 'CENTRAL';
       
@@ -127,8 +126,8 @@ export async function POST(req: Request) {
       };
       
       applicabilityResult = await applicabilityService.getApplicableRules(applicabilityQuery);
-      logger.analysisStageCompleted({ request_id, stage: 'applicability', duration_ms: Date.now() - applicabilityStart });
     }
+    logger.analysisStageCompleted({ request_id, stage: 'applicability', duration_ms: Date.now() - applicabilityStart });
 
     // 5. Flagging
     const flaggingStart = Date.now();
