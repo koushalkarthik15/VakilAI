@@ -1,3 +1,5 @@
+--- Page 1 of 1 ---
+
 # RENTAL LEASE AGREEMENT
 
 This Rental Lease Agreement ("Agreement") is made and entered into on this 1st day of October, 2026, at Hyderabad, Telangana, India.

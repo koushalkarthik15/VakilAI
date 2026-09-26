@@ -1,3 +1,5 @@
+--- Page 1 of 1 ---
+
 # FREELANCE SERVICE AGREEMENT
 
 This Freelance Service Agreement ("Agreement") is made effective as of October 1, 2026, by and between:
@@ -9,12 +11,12 @@ Represented by: Amit Verma, Director of Operations
 
 **AND**
 
-**Freelancer / Independent Contractor:**
+**Freelancer / Independent Contractor (Service Provider):**
 Name: Suresh Kumar
 Address: 12-4-43, Tarnaka, Secunderabad, Telangana 500017
 
 ## 1. SERVICES TO BE PERFORMED
-The Freelancer agrees to provide software development services to the Client, specifically developing a web application frontend using React.js (the "Services"). The Freelancer shall deliver the source code in weekly milestones as outlined in Annexure A.
+The Freelancer agrees to provide professional services and software development services to the Client, specifically developing a web application frontend using React.js (the "Services"). The Freelancer shall deliver the source code and deliverables in weekly milestones as outlined in Annexure A.
 
 ## 2. COMPENSATION
 **2.1 Total Fee:** The Client agrees to pay the Freelancer a total fixed fee of INR 1,50,000 (Rupees One Lakh Fifty Thousand only) for the Services.
@@ -47,3 +49,5 @@ Amit Verma
 
 **Freelancer Signature:** ___________________________
 Suresh Kumar
+
+--- End of Page 1 ---
