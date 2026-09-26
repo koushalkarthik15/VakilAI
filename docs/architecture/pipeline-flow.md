@@ -16,21 +16,21 @@ flowchart TD
     Extract[PDF.js Extraction]:::deterministic
     DocCtx[DocumentContext]:::data
     
-    Classify[Deterministic Classification<br>Threshold/Regex Matching]:::deterministic
-    Understand[Document Understanding<br>Semantic Interpretation (Gemini)]:::ai
+    Classify["Deterministic Classification<br>Threshold/Regex Matching"]:::deterministic
+    Understand["Document Understanding<br>Semantic Interpretation (Gemini)"]:::ai
     UndCtx[UnderstandingContext]:::data
     
-    Applicability[Deterministic Legal Applicability<br>Temporal/Jurisdictional DB Query]:::deterministic
-    Flag[Semantic Comparison/Reasoning<br>Risk Flagging (Groq)]:::ai
+    Applicability["Deterministic Legal Applicability<br>Temporal/Jurisdictional DB Query"]:::deterministic
+    Flag["Semantic Comparison/Reasoning<br>Risk Flagging (Groq)"]:::ai
     AnaCtx[AnalysisContext]:::data
     
-    Compare[Legal Baseline Comparison<br>(Groq)]:::ai
+    Compare["Legal Baseline Comparison<br>(Groq)"]:::ai
     CompCtx[ComparisonContext]:::data
     
-    Act[Action Mapping<br>Deterministic Rules -> Next Steps]:::deterministic
+    Act["Action Mapping<br>Deterministic Rules -> Next Steps"]:::deterministic
     ActCtx[ActionContext]:::data
     
-    Prepare[Preparation Drafting<br>Narrative Generation (Gemini)]:::ai
+    Prepare["Preparation Drafting<br>Narrative Generation (Gemini)"]:::ai
     PrepCtx[Optional PrepareContext]:::data
 
     %% Edges

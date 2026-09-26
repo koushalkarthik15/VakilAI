@@ -12,13 +12,13 @@ flowchart TD
     User[User PDF Upload]:::client
     Extract[Client-side PDF.js Extraction]:::client
     
-    Session[Session-Scoped Context<br>(Memory Only)]:::ephemeral
+    Session["Session-Scoped Context<br>(Memory Only)"]:::ephemeral
     PII[PII Pseudonymization]:::ephemeral
     
-    AI[Server-side AI Provider<br>(Gemini / Groq)]:::external
+    AI["Server-side AI Provider<br>(Gemini / Groq)"]:::external
     Val[Validated AI Output]:::ephemeral
     
-    KB[Legal KB (MongoDB)<br>Persistent Legal Data]:::persistent
+    KB["Legal KB (MongoDB)<br>Persistent Legal Data"]:::persistent
     
     User --> Extract
     Extract --> Session
