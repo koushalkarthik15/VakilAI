@@ -1,6 +1,5 @@
 import { successResponse, errorResponse } from '@/core/api/response';
 import crypto from 'crypto';
-import dbConnect from '@/lib/dbConnect';
 import { logger } from '@/core/logging/logger';
 
 // Domain Services
@@ -8,7 +7,7 @@ import { classifyDocument } from '@/features/document/services/classification';
 import { PseudonymizationService } from '@/core/privacy/pseudonymizationService';
 import { PresentationRestorer } from '@/core/privacy/presentationRestorer';
 import { UnderstandingService } from '@/features/understand/services/UnderstandingService';
-import { ApplicabilityService } from '@/features/legal-kb/services/applicabilityService';
+import { ApplicabilityService, ApplicabilityResult } from '@/features/legal-kb/services/applicabilityService';
 import { FlaggingService } from '@/features/flag/services/FlaggingService';
 import { ComparisonService } from '@/features/compare/services/ComparisonService';
 import { ActionService } from '@/features/act/services/ActionService';
@@ -69,9 +68,6 @@ export async function POST(req: Request) {
       });
     }
 
-    // Connect to DB for Legal KB lookups
-    await dbConnect();
-
     // 2. Document Context & Pseudonymization
     const rawDocumentContext: DocumentContext = {
       metadata: {
@@ -101,29 +97,38 @@ export async function POST(req: Request) {
     const understandingStart = Date.now();
     const understandingContext = await understandingService.extractUnderstanding(pseudonymizedContext, {
       deterministicClassification: classification,
-      // For V1, default to SUPPORTED if not found
       deterministicJurisdiction: { status: 'SUPPORTED' }
     });
     logger.analysisStageCompleted({ request_id, stage: 'understanding', duration_ms: Date.now() - understandingStart });
 
-    // 4. Applicability
-    const applicabilityStart = Date.now();
-    const jurisdictionFact = understandingContext.document_facts.find(f => f.field === 'JURISDICTION');
-    const jurisdictionValue = jurisdictionFact?.value || 'CENTRAL';
-    
-    const jurisdictionStatus = (jurisdictionFact?.status === 'UNCLEAR' || jurisdictionFact?.status === 'NOT_STATED') 
-      ? 'JURISDICTION_UNCLEAR' 
-      : 'SUPPORTED';
-    
-    const applicabilityQuery = {
-      jurisdictionStatus: jurisdictionStatus as 'SUPPORTED' | 'OUTSIDE_SCOPE' | 'JURISDICTION_UNCLEAR',
-      jurisdictionValue,
-      documentType: classification.type,
-      relevantDate: new Date() 
-    };
-    
-    const applicabilityResult = await applicabilityService.getApplicableRules(applicabilityQuery);
-    logger.analysisStageCompleted({ request_id, stage: 'applicability', duration_ms: Date.now() - applicabilityStart });
+    // 4. Applicability (skip DB in mock mode for E2E test isolation)
+    let applicabilityResult: ApplicabilityResult;
+
+    if (process.env.MOCK_AI_PROVIDERS === 'true') {
+      // Deterministic mock: no DB required, FlaggingService takes the bypass path
+      applicabilityResult = { status: 'NO_APPLICABLE_RULE' };
+    } else {
+      const { default: dbConnect } = await import('@/lib/dbConnect');
+      await dbConnect();
+
+      const applicabilityStart = Date.now();
+      const jurisdictionFact = understandingContext.document_facts.find(f => f.field === 'JURISDICTION');
+      const jurisdictionValue = jurisdictionFact?.value || 'CENTRAL';
+      
+      const jurisdictionStatus = (jurisdictionFact?.status === 'UNCLEAR' || jurisdictionFact?.status === 'NOT_STATED') 
+        ? 'JURISDICTION_UNCLEAR' 
+        : 'SUPPORTED';
+      
+      const applicabilityQuery = {
+        jurisdictionStatus: jurisdictionStatus as 'SUPPORTED' | 'OUTSIDE_SCOPE' | 'JURISDICTION_UNCLEAR',
+        jurisdictionValue,
+        documentType: classification.type,
+        relevantDate: new Date() 
+      };
+      
+      applicabilityResult = await applicabilityService.getApplicableRules(applicabilityQuery);
+      logger.analysisStageCompleted({ request_id, stage: 'applicability', duration_ms: Date.now() - applicabilityStart });
+    }
 
     // 5. Flagging
     const flaggingStart = Date.now();

@@ -27,6 +27,43 @@ export async function POST(req: Request) {
       return errorResponse('Missing required contexts or goal', 'INVALID_REQUEST', 400);
     }
 
+    if (process.env.MOCK_AI_PROVIDERS === 'true') {
+      // In mock mode, skip MongoDB queries and use AI mock directly
+      const { validateAIOutput } = await import('@/lib/ai/validator');
+      const { PreparationOutputSchema } = await import('@/features/prepare/contracts/preparationOutput');
+      
+      const aiResult = await geminiProvider.generate({
+        systemPrompt: 'Preparation',
+        userPrompt: userGoal,
+        temperature: 0
+      });
+      
+      const output = validateAIOutput(PreparationOutputSchema, aiResult);
+      
+      const prepareContext = {
+        metadata: {
+          schema_version: '1.0',
+          session_id: request_id,
+          document_id: 'mock-doc',
+          created_at: new Date().toISOString(),
+          source_stage: 'prepare'
+        },
+        selected_findings: analysisContext.findings || [],
+        selected_actions: actionContext.action_items || [],
+        user_goal: userGoal,
+        required_information: [],
+        verified_sources: [],
+        output_format: 'JSON matching PreparationOutputSchema',
+        output
+      };
+
+      logger.prepareCompleted({ request_id, duration_ms: Date.now() - startTime });
+      return successResponse({ status: 'SUCCESS', prepareContext });
+    }
+
+    const { default: dbConnect } = await import('@/lib/dbConnect');
+    await dbConnect();
+
     const prepareResult = await preparationService.generatePreparation(
       analysisContext,
       comparisonContext,
