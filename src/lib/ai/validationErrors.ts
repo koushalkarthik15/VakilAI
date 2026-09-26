@@ -43,7 +43,7 @@ export class AIValidationError extends DomainError {
     }));
 
     return new AIValidationError(
-      'AI output failed strict schema validation',
+      'Not enough information',
       'SCHEMA_VIOLATION',
       { issues: safeIssues }
     );

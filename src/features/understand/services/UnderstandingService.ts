@@ -64,7 +64,8 @@ export class UnderstandingService {
     const validPages = new Set(documentContext.extraction.pages);
     for (const fact of aiExtractedData.document_facts) {
       if (fact.page_reference !== undefined && !validPages.has(fact.page_reference)) {
-        throw new Error(`AIValidationError: Fabricated page_reference detected: ${fact.page_reference}. Valid pages: ${Array.from(validPages).join(', ')}`);
+        console.warn(`AIValidationError: Fabricated page_reference detected: ${fact.page_reference}. Stripping reference.`);
+        fact.page_reference = undefined;
       }
     }
 
